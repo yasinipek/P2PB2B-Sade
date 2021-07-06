@@ -11,7 +11,7 @@ namespace p2pson
     {
         public double IslemHesaplaFiyat(double aralikDeger)
         {
-            double altIslemFiyati = EnBuyukFiyat()+0.0001;
+            double altIslemFiyati = EnBuyukFiyat();
             double ustIslemFiyati = EnKucukFiyat()-0.0001;
             double aralik = ustIslemFiyati - altIslemFiyati;
             var rand = new Random();
@@ -23,7 +23,7 @@ namespace p2pson
                 hesaplaFiyat = 0;
             else
                 hesaplaFiyat = rastgeleAralik;
-            Console.WriteLine("Alt İşlem Fiyatı: " + altIslemFiyati + " Üst İşlem Fiyatı: " + ustIslemFiyati + " Aralık: " + aralik);
+            Console.WriteLine("Alt İşlem Fiyatı: " + altIslemFiyati + " Üst İşlem Fiyatı: " + (ustIslemFiyati+0.0001) + " Aralık: " + aralik);
             Console.WriteLine("İşlem Fiyatı: " + hesaplaFiyat);
             return hesaplaFiyat;
         }
