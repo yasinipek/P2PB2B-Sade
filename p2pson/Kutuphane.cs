@@ -40,7 +40,6 @@ namespace p2pson
             }
             return enBuyuk;
         }
-
         public double EnKucukFiyat()
         {
             double enKucuk = Math.Round(ArzTalepFiyat2("Ask", 0, 0), 4);
@@ -54,9 +53,6 @@ namespace p2pson
             }
             return enKucuk;
         }
-
-
-
         public double IslemHesaplaLot()
         {
             var rand = new Random();
