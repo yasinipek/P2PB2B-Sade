@@ -15,21 +15,15 @@ namespace p2pson
             double aralik = ustIslemFiyati - altIslemFiyati;
             var rand = new Random();
             int aralikint = Convert.ToInt32(ustIslemFiyati - altIslemFiyati);
-            double rastgeleAralik = altIslemFiyati + ((rand.Next(0, aralikint + 1) + (Math.Ceiling(rand.NextDouble()) % aralik) * 10000) / 10000);
+            double rastgeleAralik = altIslemFiyati + ((rand.Next(0, aralikint + 1) + rand.NextDouble()) % aralik);
             Console.WriteLine("Alt İşlem Fiyatı: " + altIslemFiyati + " Üst İşlem Fiyatı: " + ustIslemFiyati + " Aralık: " + aralik);
-            
-            double hesaplaFiyat = 0;
-            if (aralik <= aralikDeger)
-                hesaplaFiyat = 0;
-            else if (aralik > aralikDeger && rastgeleAralik > altIslemFiyati && rastgeleAralik < ustIslemFiyati)
-                hesaplaFiyat = rastgeleAralik;
-            Console.WriteLine("İşlem Fiyatı: " + hesaplaFiyat);
-            return hesaplaFiyat;
+            Console.WriteLine("İşlem Fiyatı: " + rastgeleAralik);
+            return rastgeleAralik;
         }
         public double IslemHesaplaLot()
         {
             var rand = new Random();
-            double rastgeleLot = Math.Round((rand.Next(1, 10)) + (rand.NextDouble()), 2);
+            double rastgeleLot = (rand.Next(10, 25)) + (rand.NextDouble());
             Console.WriteLine("İşlem Miktarı: " + rastgeleLot);
             return rastgeleLot;
         }
