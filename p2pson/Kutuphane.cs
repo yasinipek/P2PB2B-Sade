@@ -24,12 +24,12 @@ namespace p2pson
             Console.WriteLine("Alt İşlem Fiyatı: " + altIslemFiyati + " Üst İşlem Fiyatı: " + ustIslemFiyati + " Aralık: " + aralik);
             Console.WriteLine("İşlem Fiyatı: " + hesaplaFiyat);
             return hesaplaFiyat;
-
         }
+
         public double IslemHesaplaLot()
         {
             var rand = new Random();
-            double rastgeleLot = (rand.Next(10, 25)) + (rand.NextDouble());
+            double rastgeleLot = (rand.Next(1, 5)) + (rand.NextDouble());
             Console.WriteLine("İşlem Miktarı: " + rastgeleLot);
             return rastgeleLot;
         }
