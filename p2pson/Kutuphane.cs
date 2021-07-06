@@ -3,6 +3,7 @@ using RestSharp;
 using System;
 using System.Security.Cryptography;
 using System.Text;
+using System.Threading;
 
 namespace p2pson
 {
@@ -15,7 +16,8 @@ namespace p2pson
             double aralik = ustIslemFiyati - altIslemFiyati;
             var rand = new Random();
             int aralikint = Convert.ToInt32(ustIslemFiyati - altIslemFiyati);
-            double rastgeleAralik = altIslemFiyati + ((rand.Next(0, aralikint + 1) + ((Math.Ceiling(rand.NextDouble()) % aralik)*10000)/10000));
+            double rastgeleAralik1 = Math.Round(altIslemFiyati + ((rand.Next(0, aralikint + 1) + rand.NextDouble()) % aralik), 4);
+            double rastgeleAralik = Math.Ceiling(rastgeleAralik1 * 10000) / 10000;
             double hesaplaFiyat = 0;
             if (aralik <= aralikDeger)
                 hesaplaFiyat = 0;
@@ -25,7 +27,7 @@ namespace p2pson
             Console.WriteLine("İşlem Fiyatı: " + hesaplaFiyat);
             return hesaplaFiyat;
         }
-        public double EnbuyukFiyat()
+        public double EnBuyukFiyat()
         { 
             double enBuyuk = 0;
             for (int i = 0; i < 10; i++)
@@ -33,7 +35,7 @@ namespace p2pson
                 if(enBuyuk<Math.Round(ArzTalepFiyat2("Bid", 0, 0), 4))
                 {
                     enBuyuk=Math.Round(ArzTalepFiyat2("Bid", 0, 0), 4);
-                    Sleep(3000);
+                    Thread.Sleep(3000);
                 }      
 			}
             return enBuyuk;
@@ -43,7 +45,7 @@ namespace p2pson
         public double IslemHesaplaLot()
         {
             var rand = new Random();
-            double rastgeleLot = (rand.Next(1, 5)) + (rand.NextDouble());
+            double rastgeleLot = Math.Round((rand.Next(1, 5)) + (rand.NextDouble()),2);
             Console.WriteLine("İşlem Miktarı: " + rastgeleLot);
             return rastgeleLot;
         }
