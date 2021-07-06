@@ -25,7 +25,6 @@ namespace p2pson
             Console.WriteLine("İşlem Fiyatı: " + hesaplaFiyat);
             return hesaplaFiyat;
         }
-
         public double IslemHesaplaLot()
         {
             var rand = new Random();
