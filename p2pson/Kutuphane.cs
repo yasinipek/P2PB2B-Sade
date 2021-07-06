@@ -8,22 +8,28 @@ namespace p2pson
 {
     public class Kutuphane
     {
-        public double IslemHesaplaFiyat()
+        public double IslemHesaplaFiyat(double aralikDeger)
         {
             double altIslemFiyati = Math.Round(ArzTalepFiyat2("Bid", 0, 0), 4);
             double ustIslemFiyati = Math.Round(ArzTalepFiyat2("Ask", 0, 0), 4);
             double aralik = ustIslemFiyati - altIslemFiyati;
             var rand = new Random();
             int aralikint = Convert.ToInt32(ustIslemFiyati - altIslemFiyati);
-            double rastgeleAralik = altIslemFiyati + ((rand.Next(0, aralikint + 1) + rand.NextDouble()) % aralik);
+            double rastgeleAralik = altIslemFiyati + ((rand.Next(0, aralikint + 1) + (Math.Ceiling(rand.NextDouble()) % aralik) * 10000) / 10000);
             Console.WriteLine("Alt İşlem Fiyatı: " + altIslemFiyati + " Üst İşlem Fiyatı: " + ustIslemFiyati + " Aralık: " + aralik);
-            Console.WriteLine("İşlem Fiyatı: " + rastgeleAralik);
-            return rastgeleAralik;
+            
+            double hesaplaFiyat = 0;
+            if (aralik <= aralikDeger)
+                hesaplaFiyat = 0;
+            else if (aralik > aralikDeger && rastgeleAralik > altIslemFiyati && rastgeleAralik < ustIslemFiyati)
+                hesaplaFiyat = rastgeleAralik;
+            Console.WriteLine("İşlem Fiyatı: " + hesaplaFiyat);
+            return hesaplaFiyat;
         }
         public double IslemHesaplaLot()
         {
             var rand = new Random();
-            double rastgeleLot = (rand.Next(10, 25)) + (rand.NextDouble());
+            double rastgeleLot = Math.Round((rand.Next(1, 10)) + (rand.NextDouble()), 2);
             Console.WriteLine("İşlem Miktarı: " + rastgeleLot);
             return rastgeleLot;
         }
@@ -37,7 +43,7 @@ namespace p2pson
                 price = price.ToString().Replace(',', '.'),
                 request = "/api/v2/order/new",
                 nonce = nonce.ToString()
-            }) ;
+            });
         }
         public void IslemAc(string body)
         {
