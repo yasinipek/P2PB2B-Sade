@@ -16,7 +16,7 @@ namespace p2pson
             double aralik = ustIslemFiyati - altIslemFiyati;
             var rand = new Random();
             int aralikint = Convert.ToInt32(ustIslemFiyati - altIslemFiyati);
-            double rastgeleAralik1 = Math.Round(altIslemFiyati + ((rand.Next(0, aralikint + 1) + rand.NextDouble()) % aralik), 4);
+            double rastgeleAralik1 = altIslemFiyati + ((rand.Next(0, aralikint + 1) + rand.NextDouble()) % aralik);
             double rastgeleAralik = Math.Ceiling(rastgeleAralik1 * 10000) / 10000;
             double hesaplaFiyat = 0;
             if (aralik <= aralikDeger)
