@@ -19,7 +19,7 @@ namespace p2pson
             double hesaplaFiyat = 0;
             if (aralik <= aralikDeger)
                 hesaplaFiyat = 0;
-            if (aralik > aralikDeger && rastgeleAralik > altIslemFiyati && rastgeleAralik < ustIslemFiyati)
+            else
                 hesaplaFiyat = rastgeleAralik;
             Console.WriteLine("Alt İşlem Fiyatı: " + altIslemFiyati + " Üst İşlem Fiyatı: " + ustIslemFiyati + " Aralık: " + aralik);
             Console.WriteLine("İşlem Fiyatı: " + hesaplaFiyat);

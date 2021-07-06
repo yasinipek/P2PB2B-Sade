@@ -19,7 +19,7 @@ namespace p2pson
                     try
                     {
                         nonce += 1;
-                        fiyat = kh.IslemHesaplaFiyat(0.03);
+                        fiyat = kh.IslemHesaplaFiyat(0.0005);
                         lot = kh.IslemHesaplaLot();
                         string bodyAl = kh.Body("buy", lot, fiyat, nonce);
                         if (fiyat == 0)
