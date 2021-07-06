@@ -19,10 +19,13 @@ namespace p2pson
                     try
                     {
                         nonce += 1;
-                        fiyat = kh.IslemHesaplaFiyat();
+                        fiyat = kh.IslemHesaplaFiyat(0.03);
                         lot = kh.IslemHesaplaLot();
                         string bodyAl = kh.Body("buy", lot, fiyat, nonce);
-                        kh.IslemAc(bodyAl);
+                        if (fiyat == 0)
+                            Console.WriteLine("Aralık daraldı");
+                        else
+                            kh.IslemAc(bodyAl);
                     }
                     catch
                     {
@@ -35,7 +38,12 @@ namespace p2pson
                     {
                         nonce += 1;
                         string bodySat = kh.Body("sell", lot, fiyat, nonce);
-                        kh.IslemAc(bodySat);
+                        if (fiyat == 0)
+                            Console.WriteLine("Aralık daraldı");
+                        else
+                            kh.IslemAc(bodySat);
+
+                        Console.WriteLine();
                         var rand = new Random();
                         Thread.Sleep(rand.Next(60, 100) * 1000);
                     }
@@ -49,7 +57,6 @@ namespace p2pson
                     Console.WriteLine("İşlem tamamlandı.");
                     nonce = 0;
                     i = 0;
-                    //yasinipek
                 }
             }
         }
