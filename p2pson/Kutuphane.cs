@@ -15,7 +15,7 @@ namespace p2pson
             double aralik = ustIslemFiyati - altIslemFiyati;
             var rand = new Random();
             int aralikint = Convert.ToInt32(ustIslemFiyati - altIslemFiyati);
-            double rastgeleAralik = altIslemFiyati + ((rand.Next(0, aralikint + 1) + rand.NextDouble()) % aralik);
+            double rastgeleAralik = altIslemFiyati + ((rand.Next(0, aralikint + 1) + ((Math.Ceiling(rand.NextDouble()) % aralik)*10000)/10000));
             Console.WriteLine("Alt İşlem Fiyatı: " + altIslemFiyati + " Üst İşlem Fiyatı: " + ustIslemFiyati + " Aralık: " + aralik);
             Console.WriteLine("İşlem Fiyatı: " + rastgeleAralik);
             return rastgeleAralik;
