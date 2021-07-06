@@ -10,8 +10,8 @@ namespace p2pson
     {
         public double IslemHesaplaFiyat()
         {
-            double altIslemFiyati = ArzTalepFiyat("Bid");
-            double ustIslemFiyati = ArzTalepFiyat("Ask");
+            double altIslemFiyati = Math.Round(ArzTalepFiyat2("Bid", 0, 0), 4);
+            double ustIslemFiyati = Math.Round(ArzTalepFiyat2("Ask", 0, 0), 4);
             double aralik = ustIslemFiyati - altIslemFiyati;
             var rand = new Random();
             int aralikint = Convert.ToInt32(ustIslemFiyati - altIslemFiyati);
@@ -68,6 +68,28 @@ namespace p2pson
                 fiyat = Convert.ToDouble(arztalep.result.bid);
             return fiyat;
         }
+
+        public double ArzTalepFiyat2(string askBid, int deger1, int deger2)
+        {
+            var client = new RestClient("https://api.p2pb2b.io/api/v2/public/depth/result?market=NVX_USDT&limit=100");
+            client.Timeout = -1;
+            var request = new RestRequest(Method.GET);
+            IRestResponse response = client.Execute(request);
+            ArzTalep2 arzTalep2 = JsonConvert.DeserializeObject<ArzTalep2>(response.Content);
+            double fiyat = 0;
+            if (askBid == "Ask")
+            {
+                string fiyatYazi = arzTalep2.result.asks[deger1][deger2].Replace('.', ',');
+                fiyat = Convert.ToDouble(fiyatYazi);
+            }
+            if (askBid == "Bid")
+            {
+                string fiyatYazi = arzTalep2.result.bids[deger1][deger2].Replace('.', ',');
+                fiyat = Convert.ToDouble(fiyatYazi);
+            }
+            return fiyat;
+        }
+
         public string Base64Encode(string plainText)
         {
             var plainTextBytes = System.Text.Encoding.UTF8.GetBytes(plainText);

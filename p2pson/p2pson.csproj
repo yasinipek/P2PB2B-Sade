@@ -54,6 +54,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="ArzTalep.cs" />
+    <Compile Include="ArzTalep2.cs" />
     <Compile Include="Body.cs" />
     <Compile Include="Kutuphane.cs" />
     <Compile Include="Program.cs" />
