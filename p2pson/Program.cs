@@ -22,10 +22,11 @@ namespace p2pson
                         fiyat = kh.IslemHesaplaFiyat(0.0005);
                         lot = kh.IslemHesaplaLot();
                         string bodyAl = kh.Body("buy", lot, fiyat, nonce);
+                        Console.WriteLine(kh.EnbuyukFiyat()  );
                         if (fiyat == 0)
                             Console.WriteLine("Aralık daraldı");
                         else
-                            kh.IslemAc(bodyAl);
+                            //kh.IslemAc(bodyAl);
                     }
                     catch
                     {
@@ -41,7 +42,7 @@ namespace p2pson
                         if (fiyat == 0)
                             Console.WriteLine("Aralık daraldı");
                         else
-                            kh.IslemAc(bodySat);
+                            //kh.IslemAc(bodySat);
 
                         Console.WriteLine();
                         var rand = new Random();

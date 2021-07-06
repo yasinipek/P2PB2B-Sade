@@ -25,6 +25,21 @@ namespace p2pson
             Console.WriteLine("İşlem Fiyatı: " + hesaplaFiyat);
             return hesaplaFiyat;
         }
+        public double EnbuyukFiyat()
+        { 
+            double enBuyuk = 0;
+            for (int i = 0; i < 10; i++)
+			{
+                if(enBuyuk<Math.Round(ArzTalepFiyat2("Bid", 0, 0), 4))
+                {
+                    enBuyuk=Math.Round(ArzTalepFiyat2("Bid", 0, 0), 4);
+                    Sleep(3000);
+                }      
+			}
+            return enBuyuk;
+        }
+
+
         public double IslemHesaplaLot()
         {
             var rand = new Random();
