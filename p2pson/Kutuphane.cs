@@ -11,8 +11,8 @@ namespace p2pson
     {
         public double IslemHesaplaFiyat(double aralikDeger)
         {
-            double altIslemFiyati = Math.Round(ArzTalepFiyat2("Bid", 0, 0), 4);
-            double ustIslemFiyati = Math.Round(ArzTalepFiyat2("Ask", 0, 0), 4);
+            double altIslemFiyati = EnBuyukFiyat();
+            double ustIslemFiyati = EnKucukFiyat();
             double aralik = ustIslemFiyati - altIslemFiyati;
             var rand = new Random();
             int aralikint = Convert.ToInt32(ustIslemFiyati - altIslemFiyati);
@@ -28,24 +28,39 @@ namespace p2pson
             return hesaplaFiyat;
         }
         public double EnBuyukFiyat()
-        { 
-            double enBuyuk = 0;
+        {
+            double enBuyuk = Math.Round(ArzTalepFiyat2("Bid", 0, 0), 4);
             for (int i = 0; i < 10; i++)
-			{
-                if(enBuyuk<Math.Round(ArzTalepFiyat2("Bid", 0, 0), 4))
+            {
+                if (enBuyuk < Math.Round(ArzTalepFiyat2("Bid", 0, 0), 4))
                 {
-                    enBuyuk=Math.Round(ArzTalepFiyat2("Bid", 0, 0), 4);
+                    enBuyuk = Math.Round(ArzTalepFiyat2("Bid", 0, 0), 4);
                     Thread.Sleep(3000);
-                }      
-			}
+                }
+            }
             return enBuyuk;
         }
+
+        public double EnKucukFiyat()
+        {
+            double enKucuk = Math.Round(ArzTalepFiyat2("Ask", 0, 0), 4);
+            for (int i = 0; i < 10; i++)
+            {
+                if (enKucuk > Math.Round(ArzTalepFiyat2("Ask", 0, 0), 4))
+                {
+                    enKucuk = Math.Round(ArzTalepFiyat2("Ask", 0, 0), 4);
+                    Thread.Sleep(3000);
+                }
+            }
+            return enKucuk;
+        }
+
 
 
         public double IslemHesaplaLot()
         {
             var rand = new Random();
-            double rastgeleLot = Math.Round((rand.Next(1, 5)) + (rand.NextDouble()),2);
+            double rastgeleLot = Math.Round((rand.Next(1, 5)) + (rand.NextDouble()), 2);
             Console.WriteLine("İşlem Miktarı: " + rastgeleLot);
             return rastgeleLot;
         }
